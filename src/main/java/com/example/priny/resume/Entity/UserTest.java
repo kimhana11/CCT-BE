@@ -19,12 +19,16 @@ public class UserTest {
     @GeneratedValue(strategy =  GenerationType.IDENTITY)
     private Long id;
 
-    private String userId = "hana";
-    private String password = "hana";
+    private String userId;
+    private String password;
     private String role;
 
     @JsonManagedReference
     @OneToMany(mappedBy = "user", fetch = FetchType.EAGER, orphanRemoval = true)
     private List<Resume> resumeList = new ArrayList<>();
+
+    public String getUserId(){
+        return this.userId;
+    }
 
 }

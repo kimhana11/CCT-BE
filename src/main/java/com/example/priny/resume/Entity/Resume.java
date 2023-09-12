@@ -30,19 +30,34 @@ public class Resume {
     //  @OneToMany(mappedBy = "resume", fetch = FetchType.EAGER, orphanRemoval = true)
     private List<String> projectList;
 
+    @ElementCollection
+    @JsonManagedReference
+    private List<String> stackList;
+
+    @ElementCollection
+    @JsonManagedReference
+    private List<String> periodList;
+
+//    @ManyToOne
+//    @JsonBackReference
+//    //매핑할 외래키를 userId로 설정
+//    @JoinColumn(name = "userId")
+//    private UserTest user;
+
     @ManyToOne
     @JsonBackReference
     //매핑할 외래키를 userid로 설정
     @JoinColumn(name = "user_id")
     private UserTest user;
 
-
     @Builder
-    public Resume(Long id, List<String> projecList, String detail,String title) {
+    public Resume(Long id, List<String> projecList, String detail,String title, List<String> stackList, List<String> periodList) {
         this.id = id;
         this.projectList = projecList;
         this.detail = detail;
         this.title = title;
+        this.stackList = stackList;
+        this.periodList = periodList;
     }
 
 

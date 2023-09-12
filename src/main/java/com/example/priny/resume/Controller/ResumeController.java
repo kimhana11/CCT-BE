@@ -40,7 +40,7 @@ public class ResumeController {
     //이력서 저장
     @PostMapping("/resume")
     public ResponseEntity<CommonResponse> saveResume(@RequestBody ResumeSaveRequesDto resumeSaveRequesDto){
-        resumeService.saveResume("hana", resumeSaveRequesDto);
+        resumeService.saveResume(resumeSaveRequesDto.getUserId(), resumeSaveRequesDto);
         return ResponseEntity.ok(new CommonResponse("SUCCESS",200));
     }
     //이력서 전체 조회
@@ -51,7 +51,7 @@ public class ResumeController {
 
     //본인 이력서 조회
     @GetMapping("/resume/{userId}")
-    Optional<Resume> myResume(@PathVariable String userId){
+    List<ResumeResponseDto> myResume(@PathVariable String userId){
         return resumeService.getResumeById(userId);
     }
 
