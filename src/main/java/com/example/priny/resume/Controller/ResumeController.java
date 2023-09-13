@@ -19,12 +19,6 @@ public class ResumeController {
 
     private final ResumeService resumeService;
 
-//    @GetMapping("/list-resume/{id}")
-//    public List<Resume> resumes(@PathVariable Long id){
-//        List<Resume> resumes = resumeService.findResumeList(id);
-//        return resumes;
-//    }
-
     @PatchMapping("/resume/{id}")
     public ResponseEntity<CommonResponse> editResume(@PathVariable Long id, @RequestBody ResumeUpdateDto resumeUpdateDto){
         resumeService.editResume(id,resumeUpdateDto);

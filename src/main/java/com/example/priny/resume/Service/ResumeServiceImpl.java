@@ -47,7 +47,7 @@ public class ResumeServiceImpl implements ResumeService {
         return resumeRepository.findAll().stream().map(this::mapToDTO).collect(Collectors.toList());
     }
 
-    //본인 이력서 조회 ***수정 필요***8
+    //본인 이력서 조회
     @Override
     public List<ResumeResponseDto> getResumeById(String userId){
         Optional<UserTest> userOptional = userTestRepository.findByUserId(userId);
