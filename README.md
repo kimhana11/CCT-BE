@@ -13,5 +13,9 @@
 ## 커밋 규칙
 
 
- ![kimhana](https://github-readme-stats.vercel.app/api?username=kimhana11&show_icons=true&theme=merko)
+ ![kimhana](https://github-readme-stats.vercel.app/api?username=kimhana11&show_icons=true&theme=default)
+ ![kimhana](https://github-readme-stats.vercel.app/api?username=minju0224&show_icons=true&theme=radical)
+ ![kimhana](https://github-readme-stats.vercel.app/api?username=sbd3387&show_icons=true&theme=tokyonight)
+ ![kimhana](https://github-readme-stats.vercel.app/api?username=Sookyung87&show_icons=true&theme=synthwave)
+ 
  채륜이 놀러 왔다.
