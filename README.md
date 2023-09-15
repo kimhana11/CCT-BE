@@ -13,4 +13,4 @@
 ## 커밋 규칙
 
 채륜이 놀러 왔다.
- ![김하나 GitHub stats](https://github-readme-stats.vercel.app/api?username=kimhana11&show_icons=true&theme=dark)
+ ![김하나](https://github-readme-stats.vercel.app/api?username=kimhana11&show_icons=true&theme=dark)
