@@ -13,5 +13,5 @@
 ## 커밋 규칙
 
 
- ![kimhana](https://github-readme-stats.vercel.app/api?username=kimhana11&show_icons=true&theme=dark)
+ ![kimhana](https://github-readme-stats.vercel.app/api?username=kimhana11&show_icons=true&theme=merko)
  채륜이 놀러 왔다.
