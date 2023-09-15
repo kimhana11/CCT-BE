@@ -19,9 +19,9 @@ public class ResumeController {
 
     private final ResumeService resumeService;
 
-    @PatchMapping("/resume/{id}")
-    public ResponseEntity<CommonResponse> editResume(@PathVariable Long id, @RequestBody ResumeUpdateDto resumeUpdateDto){
-        resumeService.editResume(id,resumeUpdateDto);
+    @PatchMapping("/resume/{userId}")
+    public ResponseEntity<CommonResponse> editResume(@PathVariable String userId, @RequestBody ResumeUpdateDto resumeUpdateDto){
+        resumeService.editResume(userId, resumeUpdateDto);
         return ResponseEntity.ok(new CommonResponse("SUCCESS",200));
     }
 
@@ -43,10 +43,11 @@ public class ResumeController {
         return resumeService.getAllResume();
     }
 
+
     //본인 이력서 조회
-    @GetMapping("/resume/{userId}")
-    List<ResumeResponseDto> myResume(@PathVariable String userId){
-        return resumeService.getResumeById(userId);
+    @GetMapping("resume/{userId}")
+    ResumeResponseDto myResume2(@PathVariable String userId){
+        return resumeService.getResumeByUserId(userId);
     }
 
 }

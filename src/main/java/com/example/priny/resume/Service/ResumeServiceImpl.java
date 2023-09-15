@@ -3,6 +3,7 @@ package com.example.priny.resume.Service;
 import com.example.priny.resume.Entity.*;
 import com.example.priny.resume.Repository.ResumeRepository;
 import com.example.priny.resume.Repository.UserTestRepository;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
@@ -47,32 +48,40 @@ public class ResumeServiceImpl implements ResumeService {
         return resumeRepository.findAll().stream().map(this::mapToDTO).collect(Collectors.toList());
     }
 
-    //본인 이력서 조회
     @Override
-    public List<ResumeResponseDto> getResumeById(String userId){
-        Optional<UserTest> userOptional = userTestRepository.findByUserId(userId);
-
-        UserTest user = userOptional.get();
-        Optional<Resume> resumeOptional = resumeRepository.findByUser(user);
-
-        if (!resumeOptional.isPresent()) {
-            // 이력서가 존재하지 않는 경우 예외 처리
-            throw new IllegalArgumentException("이력서 존재하지 않습니다. user=" + userOptional.get());
+    //본인 이력서 조회
+    public ResumeResponseDto getResumeByUserId(String userId) {
+        UserTest user = userTestRepository.findByUserId(userId)
+                .orElseThrow(() -> new IllegalArgumentException("유저를 찾을 수 없습니다. userId=" + userId));
+        Resume resume = user.getResume();
+        if(resume == null){
+            throw new IllegalArgumentException("이력서가 존재하지 않습니다.");
         }
-        return resumeRepository.findByUser(user).stream().map(this::mapToDTO).collect(Collectors.toList());
+
+        ResumeResponseDto resumeResponseDto = mapToDTO(resume);
+        return resumeResponseDto;
     }
 
     //이력서 수정
     @Override
-    public void editResume(Long id, ResumeUpdateDto resumeUpdateDto) {
-        Resume resume = resumeRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("이력서가 존재하지 않습니다. id=" + id));
-        resume.update(resumeUpdateDto.getTitle(), resumeUpdateDto.getProjectList(), resumeUpdateDto.getDetail());
+    public void editResume(String userId, ResumeUpdateDto resumeUpdateDto) {
+        UserTest user = userTestRepository.findByUserId(userId).orElseThrow(() -> new IllegalArgumentException("유저를 찾을 수 않습니다. userId=" + userId));
+        Resume resume = user.getResume();
+        if(resume == null){
+            throw new IllegalArgumentException("이력서가 존재하지 않습니다.");
+        }
+        resumeUpdateDto.update(resume);
         resumeRepository.save(resume);
     }
 
     //이력서 삭제
     @Override
     public void deleteResume(Long id) {
+        UserTest user = userTestRepository.findById(id).orElseThrow(() ->new IllegalArgumentException("유저를 찾을 수 없습니다. id=" + id));
+        Resume resume = user.getResume();
+        if(resume == null){
+            throw new IllegalArgumentException("이력서가 존재하지 않습니다. userId=" + id);
+        }
         resumeRepository.deleteById(id);
     }
 

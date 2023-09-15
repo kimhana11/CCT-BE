@@ -23,9 +23,13 @@ public class UserTest {
     private String password;
     private String role;
 
+   // @JsonManagedReference
+   // @OneToMany(mappedBy = "user", fetch = FetchType.EAGER, orphanRemoval = true)
+    //  private List<Resume> resumeList = new ArrayList<>();
+    
     @JsonManagedReference
-    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER, orphanRemoval = true)
-    private List<Resume> resumeList = new ArrayList<>();
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    private Resume resume;
 
     public String getUserId(){
         return this.userId;

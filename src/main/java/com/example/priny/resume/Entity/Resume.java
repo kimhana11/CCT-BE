@@ -38,16 +38,9 @@ public class Resume {
     @JsonManagedReference
     private List<String> periodList;
 
-//    @ManyToOne
-//    @JsonBackReference
-//    //매핑할 외래키를 userId로 설정
-//    @JoinColumn(name = "userId")
-//    private UserTest user;
 
-    @ManyToOne
-    @JsonBackReference
-    //매핑할 외래키를 userid로 설정
-    @JoinColumn(name = "user_id")
+    @OneToOne
+    @JoinColumn(name = "user_id") // UserTest와 조인할 컬럼명 지정
     private UserTest user;
 
     @Builder
