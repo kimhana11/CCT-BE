@@ -1,17 +1,17 @@
 package com.example.priny.resume.Entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.example.priny.company.JobPosting;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
-
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Builder
+@AllArgsConstructor
 public class Resume {
 
     @Id
@@ -43,8 +43,9 @@ public class Resume {
     @JoinColumn(name = "user_id") // UserTest와 조인할 컬럼명 지정
     private UserTest user;
 
+
     @Builder
-    public Resume(Long id, List<String> projecList, String detail,String title, List<String> stackList, List<String> periodList) {
+    public Resume(Long id, List<String> projecList , String detail,String title, List<String> stackList, List<String> periodList) {
         this.id = id;
         this.projectList = projecList;
         this.detail = detail;

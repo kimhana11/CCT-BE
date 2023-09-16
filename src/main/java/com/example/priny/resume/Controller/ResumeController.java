@@ -1,5 +1,8 @@
 package com.example.priny.resume.Controller;
 
+import com.example.priny.company.JobPosting;
+import com.example.priny.company.JobPostingDto;
+import com.example.priny.company.JobService;
 import com.example.priny.config.CommonResponse;
 import com.example.priny.resume.Entity.ResumeResponseDto;
 import com.example.priny.resume.Entity.ResumeSaveRequesDto;
@@ -7,14 +10,14 @@ import com.example.priny.resume.Entity.ResumeUpdateDto;
 import com.example.priny.resume.Service.ResumeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.*;
-import com.example.priny.resume.Entity.Resume;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequiredArgsConstructor
+@Component
 public class ResumeController {
 
     private final ResumeService resumeService;
@@ -43,12 +46,6 @@ public class ResumeController {
         return resumeService.getAllResume();
     }
 
-
-    //본인 이력서 조회
-    @GetMapping("resume/{userId}")
-    ResumeResponseDto myResume2(@PathVariable String userId){
-        return resumeService.getResumeByUserId(userId);
-    }
 
 }
 

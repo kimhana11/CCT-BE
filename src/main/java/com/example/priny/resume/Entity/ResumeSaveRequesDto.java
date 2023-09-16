@@ -31,7 +31,7 @@ public class ResumeSaveRequesDto {
 
     //request dto로 받은 Resume 객체를 entity화 하여 저장
     public Resume toEntity() {
-      return Resume.builder().detail(detail).title(title).projecList(projectList).stackList(stackList).periodList(periodList).build();
+      return Resume.builder().detail(detail).title(title).projectList(projectList).stackList(stackList).periodList(periodList).build();
     }
 
 }

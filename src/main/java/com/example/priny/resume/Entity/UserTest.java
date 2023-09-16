@@ -1,5 +1,6 @@
 package com.example.priny.resume.Entity;
 
+import com.example.priny.company.JobPosting;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
@@ -31,8 +32,15 @@ public class UserTest {
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
     private Resume resume;
 
+
+    @JsonManagedReference
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER, orphanRemoval = true)
+    private List<JobPosting> jobPostings = new ArrayList<>();
+
     public String getUserId(){
         return this.userId;
     }
 
 }
+
+

@@ -1,10 +1,11 @@
 package com.example.priny.resume.Service;
 
+import com.example.priny.company.JobPosting;
+import com.example.priny.company.JobPostingDto;
 import com.example.priny.resume.Entity.*;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public interface ResumeService {
@@ -23,7 +24,5 @@ public interface ResumeService {
 
     //이력서 삭제
     public void deleteResume(Long id);
-
-
 
 }
