@@ -11,9 +11,10 @@ public class ScoutSaveRequestDto {
 
     private String sender; // 발신자
     private String receiver; // 수신자
+    private String title;
     private String massage; // 내용
 
     public Scout toEntity(){
-        return Scout.builder().sender(sender).receiver(receiver).massage(massage).build();
+        return Scout.builder().sender(sender).receiver(receiver).title(title).massage(massage).build();
     }
 }

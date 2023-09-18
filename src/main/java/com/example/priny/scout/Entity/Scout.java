@@ -17,29 +17,15 @@ public class Scout {
 
     private String sender; // 발신자
     private String receiver; // 수신자
+    private String title;
     private String massage; // 내용
-
-//    //받는사람
-//    private String recipient;
-//    private String message;
-
-    //기업쪽이랑 매핑
-//    @ManyToOne
-//    @JsonBackReference
-//    @JoinColumn(name = "company_id")
-//    private Company company;
-
-//프리랜서랑 매핑
-//    @ManyToOne
-//    @JsonBackReference
-//    @JoinColumn(name = "user_id")
-//    private UserTest user;
 
 
     @Builder
-    public Scout(String sender, String receiver, String massage){
+    public Scout(String sender, String receiver, String title, String massage){
         this.sender = sender;
         this.receiver=receiver;
+        this.title = title;
         this.massage = massage;
     }
 }
