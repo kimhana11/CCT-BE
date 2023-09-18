@@ -76,7 +76,8 @@ public class ResumeServiceImpl implements ResumeService {
 
     //이력서 삭제
     @Override
-    public void deleteResume(Long id) {
+    public void deleteResume(String userId) {
+        Long id = userTestRepository.findByUserId(userId).get().getId();
         UserTest user = userTestRepository.findById(id).orElseThrow(() ->new IllegalArgumentException("유저를 찾을 수 없습니다. id=" + id));
         Resume resume = user.getResume();
         if(resume == null){
@@ -105,7 +106,7 @@ public class ResumeServiceImpl implements ResumeService {
         int months = sum % 12; // 남은 개월 수
 
         if(years == 5){
-            logger.info("경력이 5년 이상입니다. 권한을 변경해주십시오.");
+            logger.info("경력이 5년 이상입니다. 권한을 변경하겠습니다.");
         }else if(years == 0){
             dto.setPeriodList(months+"개월");
         }

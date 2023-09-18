@@ -23,6 +23,6 @@ public interface ResumeService {
     public void editResume(String userId, ResumeUpdateDto resumeUpdateDto);
 
     //이력서 삭제
-    public void deleteResume(Long id);
+    public void deleteResume(String id);
 
 }

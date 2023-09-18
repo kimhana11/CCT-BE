@@ -29,7 +29,7 @@ public class ResumeController {
     }
 
     @DeleteMapping("/resume/{id}")
-    public ResponseEntity<CommonResponse> deleteResume(@PathVariable Long id){
+    public ResponseEntity<CommonResponse> deleteResume(@PathVariable String id){
         resumeService.deleteResume(id);
         return ResponseEntity.ok(new CommonResponse("SUCCESS",200));
     }
