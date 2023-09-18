@@ -8,6 +8,7 @@ import com.example.priny.scout.Entity.ScoutSaveRequestDto;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public interface ScoutService {
@@ -15,14 +16,16 @@ public interface ScoutService {
     //쪽지 저장
     public void saveScout(ScoutSaveRequestDto scoutSaveRequestDto);
 
-    //받은 쪽지 조회
-    public Scout getScoutById(Long id);
+    //받은 쪽지에서의 단일 조회
+    public Optional<Scout> getScoutBySender(String senderId);
+
+    public Optional<Scout> getScoutByReceiver(String receiverId);
 
     //받은 쪽지 리스트 조회
-    public List<ScoutResponseDto> getScoutByReceiver(String userId);
+    public List<ScoutResponseDto> ScoutByReceiver(String receiverId);
 
     //보낸 쪽지 리스트 조회
-    public List<ScoutResponseDto> getSenderMessages(String senderId);
+    public List<ScoutResponseDto> ScoutBySender(String senderId);
 
     //쪽지 삭제
     public void deleteScout(String userId);

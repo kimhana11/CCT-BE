@@ -28,20 +28,27 @@ public class ScoutServiceImpl implements ScoutService{
         scoutRepository.save(scout);
     }
 
+    //받은 쪽지 단일 조회(발신자 id로 조회)
     @Override
-    public Scout getScoutById(Long id) {
-        return scoutRepository.findById(id).orElse(null);
+    public Optional<Scout>  getScoutBySender(String senderId) {
+        return scoutRepository.findOneSender(senderId);
+    }
+
+    //보낸 쪽지 단일 조회 (수신자 id로 조회 (내가 보낸 사람))
+    @Override
+    public Optional<Scout>  getScoutByReceiver(String receiverId) {
+        return scoutRepository.findOneReceiver(receiverId);
     }
 
     //수신측 받은 쪽지 조회
     @Override
-    public List<ScoutResponseDto> getScoutByReceiver(String userId) {
-        return scoutRepository.findByReceiver(userId).stream().map(this::mapToDTO).collect(Collectors.toList());
+    public List<ScoutResponseDto> ScoutByReceiver(String receiverId) {
+        return scoutRepository.findByReceiver(receiverId).stream().map(this::mapToDTO).collect(Collectors.toList());
     }
 
     //발신측 보낸 쪽지 조회
     @Override
-    public List<ScoutResponseDto> getSenderMessages(String senderId) {
+    public List<ScoutResponseDto> ScoutBySender(String senderId) {
         return scoutRepository.findBySender(senderId).stream().map(this::mapToDTO).collect(Collectors.toList());
     }
 
@@ -57,7 +64,8 @@ public class ScoutServiceImpl implements ScoutService{
 
     private ScoutResponseDto mapToDTO(Scout scout) {
         ScoutResponseDto dto = new ScoutResponseDto();
-        dto.setMassage(scout.getMassage());
+        dto.setTitle(scout.getTitle());
+        dto.setMessage(scout.getMessage());
         dto.setReceiver(scout.getReceiver());
         dto.setSender(scout.getSender());
         return dto;
