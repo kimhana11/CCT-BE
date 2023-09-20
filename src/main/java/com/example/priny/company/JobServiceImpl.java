@@ -1,7 +1,7 @@
 package com.example.priny.company;
 
-import com.example.priny.resume.Entity.UserTest;
-import com.example.priny.resume.Repository.UserTestRepository;
+import com.example.priny.user.domain.User;
+import com.example.priny.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
@@ -15,13 +15,13 @@ import java.util.List;
 @Repository
 public class JobServiceImpl implements JobService{
 
-    private final UserTestRepository userTestRepository;
+    private final UserRepository userRepository;
     private final JobPostingRepository jobPostingRepository;
 
     @Override
     @Transactional
     public void saveApply(String id, JobPostingDto jobPostingDto){
-        UserTest user = userTestRepository.findByUserId(id).get();
+        User user = userRepository.findByUserId(id).get();
         JobPosting jobPosting = jobPostingDto.toEntity();
         jobPosting.setUser(user);
         jobPostingRepository.save(jobPosting);

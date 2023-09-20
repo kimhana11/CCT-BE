@@ -1,17 +1,14 @@
 package com.example.priny.scout.Service;
 
-import com.example.priny.resume.Repository.UserTestRepository;
+import com.example.priny.user.domain.User;
 import com.example.priny.scout.Entity.Scout;
 import com.example.priny.scout.Entity.ScoutResponseDto;
 import com.example.priny.scout.Entity.ScoutSaveRequestDto;
 import com.example.priny.scout.Repository.ScoutRepository;
-import lombok.AccessLevel;
-import lombok.NoArgsConstructor;
+import com.example.priny.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -21,45 +18,48 @@ import java.util.stream.Collectors;
 public class ScoutServiceImpl implements ScoutService{
 
     private final ScoutRepository scoutRepository;
+    private final UserRepository userRepository;
 
     @Override
-    public void saveScout(ScoutSaveRequestDto scoutSaveRequestDto) {
+    public void saveScout( ScoutSaveRequestDto scoutSaveRequestDto) {
+        User user = userRepository.findByUserId(scoutSaveRequestDto.getSender()).get();
         Scout scout = scoutSaveRequestDto.toEntity();
+        scout.setUser(user);
         scoutRepository.save(scout);
     }
 
-    //받은 쪽지 단일 조회(발신자 id로 조회)
+    //Long id로 쪽지 단일 조회
     @Override
-    public Optional<Scout>  getScoutBySender(String senderId) {
-        return scoutRepository.findOneSender(senderId);
+    public Optional<Scout>  getScout(ScoutResponseDto scoutResponseDto) {
+        Optional<Scout> scout = scoutRepository.findById(scoutResponseDto.getId());
+        return scoutRepository.findById(scout.get().getId());
     }
 
-    //보낸 쪽지 단일 조회 (수신자 id로 조회 (내가 보낸 사람))
-    @Override
-    public Optional<Scout>  getScoutByReceiver(String receiverId) {
-        return scoutRepository.findOneReceiver(receiverId);
-    }
 
-    //수신측 받은 쪽지 조회
+    //수신측 받은 쪽지 조회 리스트
     @Override
     public List<ScoutResponseDto> ScoutByReceiver(String receiverId) {
         return scoutRepository.findByReceiver(receiverId).stream().map(this::mapToDTO).collect(Collectors.toList());
     }
 
-    //발신측 보낸 쪽지 조회
+    //발신측 보낸 쪽지 조회 리스트
     @Override
     public List<ScoutResponseDto> ScoutBySender(String senderId) {
-        return scoutRepository.findBySender(senderId).stream().map(this::mapToDTO).collect(Collectors.toList());
+        return scoutRepository.findByReceiver(senderId).stream().map(this::mapToDTO).collect(Collectors.toList());
     }
 
-    //받은 쪽지 삭제
+//    //쪽지 선택 삭제
     @Override
-    public void deleteScout(String userId) {
-        List<Scout> scoutReceiver = scoutRepository.findByReceiver(userId);
-        // 받은 쪽지가 존재하면 쪽지 전부 삭제
-        if (!scoutReceiver.isEmpty()) {
-            scoutRepository.deleteAll(scoutReceiver);
+    public void deleteScout(ScoutResponseDto scoutResponseDto) {
+        Optional<Scout> scout = scoutRepository.findById(scoutResponseDto.getId());
+            scoutRepository.deleteById(scout.get().getId());
         }
+
+
+    //쪽지 전체 삭제
+    @Override
+    public void deleteAll(String userId) {
+            scoutRepository.deleteAll();
     }
 
     private ScoutResponseDto mapToDTO(Scout scout) {

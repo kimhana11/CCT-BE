@@ -6,9 +6,10 @@ import lombok.Setter;
 
 @Getter
 @Setter
-@Builder
+
 public class ScoutResponseDto {
 
+    private Long id;
     private String sender; // 발신자
     private String receiver; // 수신자
     private String title;

@@ -1,8 +1,9 @@
 package com.example.priny.resume.Entity;
 
+import com.example.priny.user.domain.User;
 import com.example.priny.company.JobPosting;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import jakarta.persistence.*;
+import javax.persistence.*;
 import lombok.*;
 import java.util.List;
 
@@ -41,7 +42,7 @@ public class Resume {
 
     @OneToOne
     @JoinColumn(name = "user_id") // UserTest와 조인할 컬럼명 지정
-    private UserTest user;
+    private User user;
 
 
     @Builder

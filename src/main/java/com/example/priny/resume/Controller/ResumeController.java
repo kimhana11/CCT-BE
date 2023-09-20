@@ -18,6 +18,7 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @Component
+@CrossOrigin(origins = "http://localhost:3000", allowedHeaders = "*")
 public class ResumeController {
 
     private final ResumeService resumeService;
@@ -28,9 +29,9 @@ public class ResumeController {
         return ResponseEntity.ok(new CommonResponse("SUCCESS",200));
     }
 
-    @DeleteMapping("/resume/{id}")
-    public ResponseEntity<CommonResponse> deleteResume(@PathVariable String id){
-        resumeService.deleteResume(id);
+    @DeleteMapping("/resume/{userId}")
+    public ResponseEntity<CommonResponse> deleteResume(@PathVariable String userId){
+        resumeService.deleteResume(userId);
         return ResponseEntity.ok(new CommonResponse("SUCCESS",200));
     }
 

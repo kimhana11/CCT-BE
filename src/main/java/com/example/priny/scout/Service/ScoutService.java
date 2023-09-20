@@ -14,12 +14,10 @@ import java.util.Optional;
 public interface ScoutService {
 
     //쪽지 저장
-    public void saveScout(ScoutSaveRequestDto scoutSaveRequestDto);
+    public void saveScout( ScoutSaveRequestDto scoutSaveRequestDto);
 
     //받은 쪽지에서의 단일 조회
-    public Optional<Scout> getScoutBySender(String senderId);
-
-    public Optional<Scout> getScoutByReceiver(String receiverId);
+    public Optional<Scout> getScout(ScoutResponseDto scoutResponseDto);
 
     //받은 쪽지 리스트 조회
     public List<ScoutResponseDto> ScoutByReceiver(String receiverId);
@@ -27,7 +25,11 @@ public interface ScoutService {
     //보낸 쪽지 리스트 조회
     public List<ScoutResponseDto> ScoutBySender(String senderId);
 
-    //쪽지 삭제
-    public void deleteScout(String userId);
+
+    //보낸 쪽지 선택 삭제
+   public void deleteScout(ScoutResponseDto userId);
+
+//
+     public void deleteAll(String userId);
 
 }

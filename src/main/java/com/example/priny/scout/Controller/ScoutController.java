@@ -15,20 +15,16 @@ import java.util.Optional;
 
 @RestController
 @RequiredArgsConstructor
+@RequestMapping("/scout")
+@CrossOrigin(origins = "http://localhost:3000", allowedHeaders = "*")
 public class ScoutController {
 
     private final ScoutServiceImpl scoutService;
 
     //쪽지 단일 조회
-    @GetMapping("/readSender/{senderId}")
-    public Optional<Scout> getSender(@PathVariable String senderId) {
-        return scoutService.getScoutBySender(senderId);
-    }
-
-    //쪽지 단일 조회
-    @GetMapping("/readReceiver/{receiverId}")
-    public Optional<Scout> getReceiver(@PathVariable String receiverId) {
-        return scoutService.getScoutByReceiver(receiverId);
+    @GetMapping("/read")
+    public Optional<Scout> getSender(@RequestBody ScoutResponseDto scoutResponseDto) {
+        return scoutService.getScout(scoutResponseDto);
     }
 
     //받은 쪽지 리스트 조회
@@ -44,17 +40,24 @@ public class ScoutController {
     }
 
     //쪽지 저장
-    @PostMapping("/scout")
-    public ResponseEntity<CommonResponse> saveScout(@RequestBody ScoutSaveRequestDto scoutSaveRequestDto){
-        scoutService.saveScout(scoutSaveRequestDto);
+    @PostMapping("/save")
+    public ResponseEntity<CommonResponse> saveScout( @RequestBody ScoutSaveRequestDto scoutSaveRequestDto){
+        scoutService.saveScout( scoutSaveRequestDto);
         return ResponseEntity.ok(new CommonResponse("SUCCESS", 200));
     }
 
-//    쪽지 전체 삭제
-    @DeleteMapping("/DeMassage/{userId}")
-    public ResponseEntity<CommonResponse> deleteScout(@PathVariable String userId) {
-        scoutService.deleteScout(userId);
+    //보낸 쪽지 선택 삭제
+    @DeleteMapping("/delete")
+    public ResponseEntity<CommonResponse> deleteScout(@RequestBody ScoutResponseDto scoutResponseDto){
+        scoutService.deleteScout(scoutResponseDto);
         return ResponseEntity.ok(new CommonResponse("SUCCESS", 200));
     }
+
+////    쪽지 전체 삭제
+//    @DeleteMapping("/deleteAll/{userId}")
+//    public ResponseEntity<CommonResponse> deleteScout(@PathVariable String userId) {
+//        scoutService.deleteAll(userId);
+//        return ResponseEntity.ok(new CommonResponse("SUCCESS", 200));
+//    }
 }
 

@@ -1,8 +1,8 @@
 package com.example.priny.company;
 
-import com.example.priny.resume.Entity.UserTest;
+import com.example.priny.user.domain.User;
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import jakarta.persistence.*;
+import javax.persistence.*;
 import lombok.*;
 
 @Entity
@@ -22,7 +22,7 @@ public class JobPosting {
     @ManyToOne
     @JsonBackReference
     @JoinColumn(name = "user_id")
-    private UserTest user;
+    private User user;
 
 
     @Builder

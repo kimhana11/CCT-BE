@@ -1,8 +1,8 @@
 package com.example.priny.scout.Entity;
 
-import com.example.priny.resume.Entity.UserTest;
+import com.example.priny.user.domain.User;
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import jakarta.persistence.*;
+import javax.persistence.*;
 import lombok.*;
 
 @Entity
@@ -20,12 +20,19 @@ public class Scout {
     private String title;
     private String message; // 내용
 
+    //발신자 userId
+    @ManyToOne
+    @JsonBackReference
+    @JoinColumn(name = "user_id")
+    private User user;
+
 
     @Builder
-    public Scout(String sender, String receiver, String title, String message){
+    public Scout(String sender, String receiver, String title, String message, User user){
         this.sender = sender;
         this.receiver=receiver;
         this.title = title;
         this.message = message;
+        this.user = user;
     }
 }
