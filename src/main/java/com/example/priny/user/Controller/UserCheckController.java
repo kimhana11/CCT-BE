@@ -32,12 +32,11 @@ public class UserCheckController {
 
     @PostMapping("/emailCheck")
     public ResponseEntity<CommonResponse> emailCheck(@RequestBody UserCheck userCheck){
-        return userSignupService.idCheck(userCheck);
+        return userSignupService.emailCheck(userCheck);
     }
 
     @PostMapping("/phoneCheck")
     public ResponseEntity<CommonResponse> phoneCheck(@RequestBody UserCheck userCheck){
-        return userSignupService.idCheck(userCheck);
+        return userSignupService.phoneCheck(userCheck);
     }
-
 }

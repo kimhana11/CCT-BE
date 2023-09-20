@@ -21,7 +21,8 @@ public class ResumeSaveRequesDto {
     private List<String> periodList;
 
     @Builder
-    public ResumeSaveRequesDto(String title, List<String> projectList, String detail, List<String> stackList, List<String> periodList) {
+    public ResumeSaveRequesDto(String userId,String title, List<String> projectList, String detail, List<String> stackList, List<String> periodList) {
+        this.userId = userId;
         this.title = title;
         this.detail = detail;
         this.projectList = projectList;
@@ -31,7 +32,7 @@ public class ResumeSaveRequesDto {
 
     //request dto로 받은 Resume 객체를 entity화 하여 저장
     public Resume toEntity() {
-      return Resume.builder().detail(detail).title(title).projectList(projectList).stackList(stackList).periodList(periodList).build();
+      return Resume.builder().userId(userId).detail(detail).title(title).projectList(projectList).stackList(stackList).periodList(periodList).build();
     }
 
 }

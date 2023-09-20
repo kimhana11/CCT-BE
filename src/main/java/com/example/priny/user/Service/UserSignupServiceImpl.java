@@ -10,7 +10,8 @@ import com.example.priny.user.domain.User;
 import com.example.priny.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.crypto.password.PasswordEncoder;
+import com.example.priny.user.Config.PasswordEncoderConfig;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -24,14 +25,15 @@ import java.util.Optional;
 public class UserSignupServiceImpl implements UserSignupService {
 
     private final UserRepository userRepository;
-    private final PasswordEncoder passwordEncoder;
+    private final BCryptPasswordEncoder encoder;
+ //   private final PasswordEncoderConfig passwordEncoder;
 
     @Transactional
     @Override
     public Long signUp(UserDto userDto) throws Exception {
         Optional<User> testUser = userRepository.findByUserId(userDto.getUserId());
         User user = userDto.toEntity();
-        user.encodePassword(passwordEncoder);
+        user.setPassword(encoder.encode(userDto.getPassword()));
         user.addUserAuthority(userDto);
         userRepository.save(user);
         return user.getId();

@@ -9,10 +9,13 @@ import com.example.priny.resume.Entity.ResumeSaveRequesDto;
 import com.example.priny.resume.Entity.ResumeUpdateDto;
 import com.example.priny.resume.Service.ResumeService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.*;
 
+import java.nio.charset.Charset;
 import java.util.List;
 
 @RestController
@@ -22,6 +25,7 @@ import java.util.List;
 public class ResumeController {
 
     private final ResumeService resumeService;
+
 
     @PatchMapping("/resume/{userId}")
     public ResponseEntity<CommonResponse> editResume(@PathVariable String userId, @RequestBody ResumeUpdateDto resumeUpdateDto){
@@ -35,12 +39,14 @@ public class ResumeController {
         return ResponseEntity.ok(new CommonResponse("SUCCESS",200));
     }
 
+
     //이력서 저장
     @PostMapping("/resume")
-    public ResponseEntity<CommonResponse> saveResume(@RequestBody ResumeSaveRequesDto resumeSaveRequesDto){
+    public ResponseEntity<CommonResponse> saveResume(@RequestBody ResumeSaveRequesDto resumeSaveRequesDto){HttpHeaders headers = new HttpHeaders();
         resumeService.saveResume(resumeSaveRequesDto.getUserId(), resumeSaveRequesDto);
         return ResponseEntity.ok(new CommonResponse("SUCCESS",200));
     }
+
     //이력서 전체 조회
     @GetMapping("/resumes")
     public List<ResumeResponseDto> resumes(){

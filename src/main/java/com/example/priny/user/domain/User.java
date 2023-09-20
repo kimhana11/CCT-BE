@@ -3,6 +3,7 @@ package com.example.priny.user.domain;
 import com.example.priny.company.JobPosting;
 import com.example.priny.resume.Entity.Resume;
 import com.example.priny.scout.Entity.Scout;
+import com.example.priny.user.Config.PasswordEncoderConfig;
 import com.example.priny.user.DTO.UserDto;
 import com.example.priny.user.domain.model.MemberRole;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -96,9 +97,9 @@ public class User extends TimeEntity {
     public void addUserAuthority(UserDto userDto) {
         this.roles = userDto.getRoles();
     }
-    public void encodePassword(PasswordEncoder passwordEncoder){
-        this.password = passwordEncoder.encode(password);
-    }
+//    public void encodePassword(PasswordEncoderConfig passwordEncoder){
+//        this.password = PasswordEncoderConfig();
+//    }
     public void setDeleted(boolean b) {
     }
 

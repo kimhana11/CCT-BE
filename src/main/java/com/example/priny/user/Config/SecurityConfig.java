@@ -1,5 +1,6 @@
 package com.example.priny.user.Config;
 
+import com.example.priny.user.Service.JwtAuthenticationFilter;
 import com.example.priny.user.Service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,14 +13,23 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+
+import java.util.Arrays;
+import java.util.List;
 
 @Configuration
 @EnableWebSecurity
 @RequiredArgsConstructor
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    @Autowired
-    UserService userService;
+
+    private final UserService userService;
+    private final JwtAuthenticationFilter jwtAuthenticationFilter;
 
 
     @Override
@@ -28,22 +38,28 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .formLogin().disable()
                 .httpBasic().disable()
-                .cors().disable()
+                .cors()
+                .and()
                 .csrf().disable()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeHttpRequests()
                 .antMatchers("/user/login").permitAll()
                 .antMatchers("/user/join").permitAll()
-                .antMatchers("/user").hasRole("USER")
-                .anyRequest().authenticated();
+                .antMatchers("/idCheck").permitAll()
+                .antMatchers("/emailCheck").permitAll()
+                .antMatchers("http://localhost:3000").permitAll()
+                //  .antMatchers("/user").hasRole("USER")
+                .anyRequest().authenticated()
+                .and()
+                .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
 
     }
 
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return PasswordEncoderFactories.createDelegatingPasswordEncoder();
-    }
+//    @Bean
+//    public PasswordEncoder passwordEncoder() {
+//        return PasswordEncoderFactories.createDelegatingPasswordEncoder();
+//    }
 
     private static final String[] AUTH_WHITELIST = {
             "/v2/api-docs",
@@ -65,4 +81,22 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 public void configure(WebSecurity webSecurity) throws Exception{
     webSecurity.ignoring().antMatchers(AUTH_WHITELIST);
 }
+
+
+//@Bean
+//CorsConfigurationSource corsConfigurationSource() {
+//        CorsConfiguration configuration = new CorsConfiguration();
+//        configuration.setAllowCredentials(false);
+//        configuration.setAllowedOrigins(List.of("<http://localhost:3000>", "..."));
+//        configuration.setAllowedMethods(List.of("HEAD", "GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"));
+//        configuration.setAllowCredentials(true);
+//        configuration.setAllowedHeaders(List.of("Authorization", "Authorization-refresh", "Cache-Control", "Content-Type"));
+//        configuration.setExposedHeaders(List.of("Authorization", "Authorization-refresh"));
+//        configuration.addAllowedOrigin("*");
+//        configuration.addAllowedHeader("*");
+//        configuration.addAllowedMethod("*");
+//        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+//        source.registerCorsConfiguration("/**", configuration);
+//        return source;
+//    }
 }

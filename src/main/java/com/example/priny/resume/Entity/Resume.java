@@ -19,6 +19,8 @@ public class Resume {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "user_strId")
+    private String userId;
     //한줄소개
     private String title;
 
@@ -46,8 +48,8 @@ public class Resume {
 
 
     @Builder
-    public Resume(Long id, List<String> projecList , String detail,String title, List<String> stackList, List<String> periodList) {
-        this.id = id;
+    public Resume(String id, List<String> projecList , String detail,String title, List<String> stackList, List<String> periodList) {
+        this.userId = id;
         this.projectList = projecList;
         this.detail = detail;
         this.title = title;

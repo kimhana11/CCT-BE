@@ -5,6 +5,7 @@ import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -17,13 +18,15 @@ import java.util.Base64;
 import java.util.Date;
 import java.util.List;
 
-@RequiredArgsConstructor
+//@RequiredArgsConstructor
 @Component
 public class TokenProvider {
     private static String key = "c2lsdmVybmluZS10ZWNoLXNwcmluZy1ib290LWp3dC10dXRvcmlhbC1zZWNyZXQtc2lsdmVybmluZS10ZWNoLXNwcmluZy1ib290LWp3dC10dXRvcmlhbC1zZWNyZXQK";
 
     private static long tokenValidTime = 1440 * 60 * 7 * 1000L;
-    private final UserDetailsService userDetailsService;
+
+    @Autowired
+    private UserDetailsService userDetailsService;
 
     @PostConstruct
     protected void init(){
@@ -54,7 +57,7 @@ public class TokenProvider {
 
     }
     public String resolveToken(HttpServletRequest request){
-        return request.getHeader("AUTH_TOKEN");
+        return request.getHeader("AAuthorization");
     }
 
     public boolean validateToken(String jwtToken){
