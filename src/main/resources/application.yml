@@ -10,19 +10,24 @@ spring:
     username: root
     password: db12
 
+security:
+  jwt:
+    header: Authorization
+    token:
+      secret-key: secretsecretsecretsecretsecret
 
-  security:
-    jwt:
-      header: Authorization
-      secret: c2lsdmVybmluZS10ZWNoLXNwcmluZy1ib290LWp3dC10dXRvcmlhbC1zZWNyZXQtc2lsdmVybmluZS10ZWNoLXNwcmluZy1ib290LWp3dC10dXRvcmlhbC1zZWNyZXQK
-      token-validity-in-seconds: 86400
+#  security:
+#    jwt:
+#      header: Authorization
+#      secret: c2lsdmVybmluZS10ZWNoLXNwcmluZy1ib290LWp3dC10dXRvcmlhbC1zZWNyZXQtc2lsdmVybmluZS10ZWNoLXNwcmluZy1ib290LWp3dC10dXRvcmlhbC1zZWNyZXQK
+#      token-validity-in-seconds: 86400
 
   jpa:
     database: mysql
     database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
     generate-ddl: true
     hibernate:
-      ddl-auto: update
+      ddl-auto:create
     show_sql: true
     format_sql: true
 

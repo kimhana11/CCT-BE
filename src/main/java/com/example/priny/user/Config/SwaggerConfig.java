@@ -15,7 +15,7 @@ public class SwaggerConfig {
     public Docket api() {
         return new Docket(DocumentationType.SWAGGER_2)
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("com.example.cct.Controller")) // 여기에 컨트롤러 패키지명을 넣어주세요.
+                .apis(RequestHandlerSelectors.basePackage("com.example.priny")) // 여기에 컨트롤러 패키지명을 넣어주세요.
                 .build();
     }
 }

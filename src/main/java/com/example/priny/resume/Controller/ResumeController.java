@@ -12,6 +12,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,7 +26,6 @@ import java.util.List;
 public class ResumeController {
 
     private final ResumeService resumeService;
-
 
     @PatchMapping("/resume/{userId}")
     public ResponseEntity<CommonResponse> editResume(@PathVariable String userId, @RequestBody ResumeUpdateDto resumeUpdateDto){

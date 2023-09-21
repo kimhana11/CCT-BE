@@ -3,9 +3,7 @@ package com.example.priny.user.domain;
 import com.example.priny.company.JobPosting;
 import com.example.priny.resume.Entity.Resume;
 import com.example.priny.scout.Entity.Scout;
-import com.example.priny.user.Config.PasswordEncoderConfig;
 import com.example.priny.user.DTO.UserDto;
-import com.example.priny.user.domain.model.MemberRole;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -20,7 +18,7 @@ import java.util.List;
 @Getter
 @Setter
 @Entity
-//@Table(name =  "USER")
+@Table(name =  "user")
 public class User extends TimeEntity {
 
     @Id
@@ -43,9 +41,8 @@ public class User extends TimeEntity {
 
     private String cname;
 
-    @CollectionTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"))
-    @Enumerated(EnumType.STRING)
-    private MemberRole roles;
+    private String roles ;
+
 
     @JsonManagedReference
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
@@ -63,7 +60,7 @@ public class User extends TimeEntity {
 
     @Builder
     public User(String userId, String name, String password, String phone,
-                String brith, String email, String address, MemberRole roles, String cname) {
+                String brith, String email, String address, String roles, String cname) {
         this.userId = userId;
         this.name = name;
         this.password = password;

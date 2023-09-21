@@ -9,6 +9,8 @@ import com.example.priny.user.DTO.UserSignInResponseDto;
 import com.example.priny.user.domain.User;
 import com.example.priny.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import com.example.priny.user.Config.PasswordEncoderConfig;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -24,8 +26,10 @@ import java.util.Optional;
 @Service
 public class UserSignupServiceImpl implements UserSignupService {
 
+    private final TokenProvider tokenProvider;
     private final UserRepository userRepository;
     private final BCryptPasswordEncoder encoder;
+    Logger logger = LoggerFactory.getLogger(this.getClass());
  //   private final PasswordEncoderConfig passwordEncoder;
 
     @Transactional
@@ -70,19 +74,23 @@ public class UserSignupServiceImpl implements UserSignupService {
 
     @Override
     public UserSignInResponseDto login(UserSignInDto userSignInDto) {
-        UserSignInResponseDto userSignInResponseDto = new UserSignInResponseDto();
 
-            Optional<User> member = userRepository.findByUserId(userSignInDto.getUserId());
+        //userId로 유저 조회
+        User user = userRepository.findByUserId(userSignInDto.getUserId()).get();
+        logger.info("[getSignInResult] Id : {}", userSignInDto.getUserId());
 
-            List<String> roles = new ArrayList<>();
-            roles.add(member.get().getRoles().name());
-            userSignInResponseDto.setToken(TokenProvider.createToken(member.get().getUserId(), roles));
-            userSignInResponseDto.setUserId(member.get().getUserId());
-            userSignInResponseDto.setName(member.get().getName());
-            userSignInResponseDto.setId(member.get().getId());
+        logger.info("[getSignInResult] SignInResultDto 객체 생성");
+        UserSignInResponseDto userSignInResponseDto =  UserSignInResponseDto.builder()
+                .token(tokenProvider.createToken(String.valueOf(user.getUserId()),
+                        user.getRoles())).
+                userId(userSignInDto.getUserId())
+                .id(user.getId())
+                .name(user.getName())
+                .build();
 
-            return userSignInResponseDto;
+        logger.info("[getSignInResult] getSignInResult 객체에 값 주입");
 
+        return userSignInResponseDto;
     }
 
 

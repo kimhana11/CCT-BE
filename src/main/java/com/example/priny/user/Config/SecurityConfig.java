@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -31,6 +32,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private final UserService userService;
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
 
+ //   @Bean
+ //   @Override
+ //   public AuthenticationManager authenticationManagerBean() throws Exception {
+  //      return super.authenticationManagerBean();
+   // }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -46,10 +52,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeHttpRequests()
                 .antMatchers("/user/login").permitAll()
                 .antMatchers("/user/join").permitAll()
+                .antMatchers("/resume").permitAll()
+                .antMatchers("/resumes").permitAll()
+                .antMatchers("/scout").permitAll()
                 .antMatchers("/idCheck").permitAll()
                 .antMatchers("/emailCheck").permitAll()
                 .antMatchers("http://localhost:3000").permitAll()
-                //  .antMatchers("/user").hasRole("USER")
+                .antMatchers("/user/**").hasRole("USER")
                 .anyRequest().authenticated()
                 .and()
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);

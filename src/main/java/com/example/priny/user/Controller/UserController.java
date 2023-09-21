@@ -7,6 +7,8 @@ import com.example.priny.user.Service.UserService;
 import com.example.priny.user.Service.UserSignupService;
 import com.example.priny.user.domain.User;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -26,7 +28,7 @@ public class UserController {
 
     private final UserSignupService userSignupService;
     private final UserService userService;
-
+    Logger logger = LoggerFactory.getLogger(this.getClass());
     //@CrossOrigin(origins = "*", allowedHeaders = "*")
     @PostMapping("/join")
     @ResponseStatus(HttpStatus.OK)
@@ -39,11 +41,17 @@ public class UserController {
     }
     @PostMapping("/login")
     public UserSignInResponseDto login(@RequestBody UserSignInDto userSignInDto){
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(new MediaType("text","xml", Charset.forName("UTF-8")));
-        headers.set("Access-Control-Allow-Origin", "*");
-        headers.set("Access-Control-Allow-Methods","GET,POST,OPTIONS,DELETE,PUT");
-        return userSignupService.login(userSignInDto);
+
+        logger.info("[signIn]로그인을 시도하고 있습니다. id : {}",userSignInDto.getUserId());
+
+      UserSignInResponseDto userSignInResponseDto = userSignupService.login(userSignInDto);
+
+        if(userSignInResponseDto.getToken() !=null){
+            logger.info("[signIn] 정상적으로 로그인되었습니다. id : {}, token : {}", userSignInDto.getUserId(), userSignInResponseDto.getToken());
+            return userSignInResponseDto;
+        }
+        return userSignInResponseDto;
+
     }
 
 

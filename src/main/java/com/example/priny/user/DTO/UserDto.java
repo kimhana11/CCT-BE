@@ -2,7 +2,6 @@ package com.example.priny.user.DTO;
 
 
 import com.example.priny.user.domain.User;
-import com.example.priny.user.domain.model.MemberRole;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,6 +9,7 @@ import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import java.util.List;
 
 @NoArgsConstructor
 @Getter
@@ -35,13 +35,13 @@ public class UserDto {
 
     private String brith;
 
-    private MemberRole roles;
+    private String roles;
 
     //담당자명
     private String cname;
 
     @Builder
-    public UserDto(String userId, String name, String password, String phone, String brith, String email, String address, MemberRole roles, String cname) {
+    public UserDto(String userId, String name, String password, String phone, String brith, String email, String address, String roles, String cname) {
         this.userId = userId;
         this.name = name;
         this.password = password;
@@ -64,7 +64,7 @@ public class UserDto {
                     .brith(brith) //
                     .email(email)
                     .password(password)
-                    .roles(MemberRole.USER)
+                    .roles(roles)
                     .build();
         }
         //기업
@@ -77,7 +77,7 @@ public class UserDto {
                     .email(email)
                     .name(name) //회사명
                     .password(password)
-                    .roles(MemberRole.ADMIN)
+                    .roles(roles)
                     .build();
         }
     }
