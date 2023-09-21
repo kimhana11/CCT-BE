@@ -7,7 +7,7 @@ import javax.persistence.*;
 import lombok.*;
 import java.util.List;
 
-@Entity(name = "resume")
+@Entity
 @Getter
 @Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)

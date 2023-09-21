@@ -18,7 +18,7 @@ import java.util.List;
 @Getter
 @Setter
 @Entity
-@Table(name =  "user")
+@Table(name = "USER")
 public class User extends TimeEntity {
 
     @Id

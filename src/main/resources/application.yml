@@ -6,7 +6,7 @@
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/resume
+    url: jdbc:mysql://localhost:3306/hello
     username: root
     password: db12
 
@@ -27,7 +27,7 @@ security:
     database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
     generate-ddl: true
     hibernate:
-      ddl-auto:create
+     ddl-auto: create
     show_sql: true
     format_sql: true
 
