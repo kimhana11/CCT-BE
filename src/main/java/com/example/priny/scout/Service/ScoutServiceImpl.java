@@ -1,10 +1,11 @@
 package com.example.priny.scout.Service;
 
-import com.example.priny.user.domain.User;
+
 import com.example.priny.scout.Entity.Scout;
 import com.example.priny.scout.Entity.ScoutResponseDto;
 import com.example.priny.scout.Entity.ScoutSaveRequestDto;
 import com.example.priny.scout.Repository.ScoutRepository;
+import com.example.priny.user.domain.User;
 import com.example.priny.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -30,7 +31,7 @@ public class ScoutServiceImpl implements ScoutService{
 
     //Long id로 쪽지 단일 조회
     @Override
-    public Optional<Scout>  getScout(ScoutResponseDto scoutResponseDto) {
+    public Optional<Scout> getScout(ScoutResponseDto scoutResponseDto) {
         Optional<Scout> scout = scoutRepository.findById(scoutResponseDto.getId());
         return scoutRepository.findById(scout.get().getId());
     }

@@ -1,9 +1,10 @@
 package com.example.priny.user.Config;
 
+
 import org.apache.logging.log4j.util.Strings;
 import org.springframework.stereotype.Component;
+
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.util.Enumeration;
 
 //헤더에서 토큰 추출하기

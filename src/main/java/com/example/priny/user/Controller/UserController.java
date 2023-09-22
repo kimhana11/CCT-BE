@@ -2,23 +2,21 @@ package com.example.priny.user.Controller;
 
 import com.example.priny.user.DTO.UserDto;
 import com.example.priny.user.DTO.UserSignInDto;
-import com.example.priny.user.DTO.UserSignInResponseDto;
 import com.example.priny.user.Service.UserService;
 import com.example.priny.user.Service.UserSignupService;
+import com.example.priny.user.DTO.UserSignInResponseDto;
 import com.example.priny.user.domain.User;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.security.core.Authentication;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.nio.charset.Charset;
 
 @RequiredArgsConstructor
 @RestController
@@ -33,12 +31,9 @@ public class UserController {
     @PostMapping("/join")
     @ResponseStatus(HttpStatus.OK)
     public Long join(@RequestBody UserDto dto) throws Exception{
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(new MediaType("text","xml", Charset.forName("UTF-8")));
-        headers.set("Access-Control-Allow-Origin", "*");
-        headers.set("Access-Control-Allow-Methods","GET,POST,OPTIONS,DELETE,PUT");
         return userSignupService.signUp(dto);
     }
+
     @PostMapping("/login")
     public UserSignInResponseDto login(@RequestBody UserSignInDto userSignInDto){
 

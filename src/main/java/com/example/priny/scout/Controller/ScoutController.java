@@ -4,7 +4,6 @@ import com.example.priny.config.CommonResponse;
 import com.example.priny.scout.Entity.Scout;
 import com.example.priny.scout.Entity.ScoutResponseDto;
 import com.example.priny.scout.Entity.ScoutSaveRequestDto;
-import com.example.priny.scout.Service.ScoutService;
 import com.example.priny.scout.Service.ScoutServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -41,7 +40,7 @@ public class ScoutController {
 
     //쪽지 저장
     @PostMapping("/save")
-    public ResponseEntity<CommonResponse> saveScout( @RequestBody ScoutSaveRequestDto scoutSaveRequestDto){
+    public ResponseEntity<CommonResponse> saveScout(@RequestBody ScoutSaveRequestDto scoutSaveRequestDto){
         scoutService.saveScout( scoutSaveRequestDto);
         return ResponseEntity.ok(new CommonResponse("SUCCESS", 200));
     }

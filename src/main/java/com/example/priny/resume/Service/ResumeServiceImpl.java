@@ -1,13 +1,18 @@
 package com.example.priny.resume.Service;
 
-import com.example.priny.resume.Entity.*;
+
+import com.example.priny.resume.Entity.Resume;
+import com.example.priny.resume.Entity.ResumeResponseDto;
+import com.example.priny.resume.Entity.ResumeSaveRequesDto;
+import com.example.priny.resume.Entity.ResumeUpdateDto;
 import com.example.priny.resume.Repository.ResumeRepository;
+import com.example.priny.user.domain.User;
 import com.example.priny.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
-import com.example.priny.user.domain.User;
+
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -40,7 +45,7 @@ public class ResumeServiceImpl implements ResumeService {
 
     @Override
     //이력서 조회
-    public List<ResumeResponseDto>getAllResume(){
+    public List<ResumeResponseDto> getAllResume(){
         return resumeRepository.findAll().stream().map(this::mapToDTO).collect(Collectors.toList());
     }
 

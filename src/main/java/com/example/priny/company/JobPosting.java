@@ -2,8 +2,9 @@ package com.example.priny.company;
 
 import com.example.priny.user.domain.User;
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import javax.persistence.*;
 import lombok.*;
+
+import javax.persistence.*;
 
 @Entity
 @Getter

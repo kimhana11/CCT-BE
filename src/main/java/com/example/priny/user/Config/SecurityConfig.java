@@ -1,27 +1,16 @@
 package com.example.priny.user.Config;
 
+
 import com.example.priny.user.Service.JwtAuthenticationFilter;
 import com.example.priny.user.Service.UserService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.crypto.factory.PasswordEncoderFactories;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import org.springframework.web.cors.CorsConfiguration;
-import org.springframework.web.cors.CorsConfigurationSource;
-import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
-import org.springframework.web.servlet.config.annotation.CorsRegistry;
-
-import java.util.Arrays;
-import java.util.List;
 
 @Configuration
 @EnableWebSecurity
@@ -65,11 +54,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     }
 
-//    @Bean
-//    public PasswordEncoder passwordEncoder() {
-//        return PasswordEncoderFactories.createDelegatingPasswordEncoder();
-//    }
-
     private static final String[] AUTH_WHITELIST = {
             "/v2/api-docs",
             "/v3/api-docs/**",
@@ -92,20 +76,4 @@ public void configure(WebSecurity webSecurity) throws Exception{
 }
 
 
-//@Bean
-//CorsConfigurationSource corsConfigurationSource() {
-//        CorsConfiguration configuration = new CorsConfiguration();
-//        configuration.setAllowCredentials(false);
-//        configuration.setAllowedOrigins(List.of("<http://localhost:3000>", "..."));
-//        configuration.setAllowedMethods(List.of("HEAD", "GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"));
-//        configuration.setAllowCredentials(true);
-//        configuration.setAllowedHeaders(List.of("Authorization", "Authorization-refresh", "Cache-Control", "Content-Type"));
-//        configuration.setExposedHeaders(List.of("Authorization", "Authorization-refresh"));
-//        configuration.addAllowedOrigin("*");
-//        configuration.addAllowedHeader("*");
-//        configuration.addAllowedMethod("*");
-//        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-//        source.registerCorsConfiguration("/**", configuration);
-//        return source;
-//    }
 }

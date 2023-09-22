@@ -1,12 +1,11 @@
 package com.example.priny.scout.Entity;
 
-import lombok.Builder;
+
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-
 public class ScoutResponseDto {
 
     private Long id;

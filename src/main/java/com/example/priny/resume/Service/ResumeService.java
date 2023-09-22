@@ -1,8 +1,9 @@
 package com.example.priny.resume.Service;
 
-import com.example.priny.company.JobPosting;
-import com.example.priny.company.JobPostingDto;
-import com.example.priny.resume.Entity.*;
+
+import com.example.priny.resume.Entity.ResumeResponseDto;
+import com.example.priny.resume.Entity.ResumeSaveRequesDto;
+import com.example.priny.resume.Entity.ResumeUpdateDto;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

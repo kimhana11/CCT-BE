@@ -1,11 +1,12 @@
 package com.example.priny.resume.Entity;
 
+
 import com.example.priny.user.domain.User;
-import com.example.priny.company.JobPosting;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import javax.persistence.*;
 import lombok.*;
-import java.util.List;
+
+import javax.persistence.*;
+;import java.util.List;
 
 @Entity
 @Getter
@@ -19,7 +20,7 @@ public class Resume {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "user_strId")
+    @Column(name = "str_id")
     private String userId;
     //한줄소개
     private String title;

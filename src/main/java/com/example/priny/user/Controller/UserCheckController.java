@@ -1,6 +1,7 @@
 package com.example.priny.user.Controller;
 
-import com.example.priny.user.Config.CommonResponse;
+
+import com.example.priny.config.CommonResponse;
 import com.example.priny.user.DTO.UserCheck;
 import com.example.priny.user.Service.UserService;
 import com.example.priny.user.Service.UserSignupService;
@@ -23,10 +24,6 @@ public class UserCheckController {
 
     @PostMapping("/idCheck")
     public ResponseEntity<CommonResponse> idCheck(@RequestBody UserCheck userCheck){
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(new MediaType("text","xml", Charset.forName("UTF-8")));
-        headers.set("Access-Control-Allow-Origin", "*");
-        headers.set("Access-Control-Allow-Methods","GET,POST,OPTIONS,DELETE,PUT");
         return userSignupService.idCheck(userCheck);
     }
 

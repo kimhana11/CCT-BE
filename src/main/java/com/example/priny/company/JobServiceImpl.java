@@ -1,14 +1,16 @@
 package com.example.priny.company;
 
+
 import com.example.priny.user.domain.User;
 import com.example.priny.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
+import javax.transaction.Transactional;
 import java.util.List;
+
 @Component
 @Service
 @RequiredArgsConstructor

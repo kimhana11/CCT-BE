@@ -1,8 +1,7 @@
 package com.example.priny.scout.Entity;
 
-import com.example.priny.user.domain.User;
+
 import lombok.AccessLevel;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 

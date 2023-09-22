@@ -1,5 +1,6 @@
 package com.example.priny.resume.Entity;
 
+
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;

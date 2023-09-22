@@ -6,9 +6,25 @@
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/hello
+    url: jdbc:mysql://localhost:3306/resume
     username: root
     password: db12
+
+  jpa:
+    database: mysql
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+    generate-ddl: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect
+        ddl-auto: create
+    show_sql: true
+    format_sql: true
+
+
+  mvc:
+    path match:
+      matching-strategy: ant_path_matcher
 
 security:
   jwt:
@@ -16,35 +32,8 @@ security:
     token:
       secret-key: secretsecretsecretsecretsecret
 
-#  security:
-#    jwt:
-#      header: Authorization
-#      secret: c2lsdmVybmluZS10ZWNoLXNwcmluZy1ib290LWp3dC10dXRvcmlhbC1zZWNyZXQtc2lsdmVybmluZS10ZWNoLXNwcmluZy1ib290LWp3dC10dXRvcmlhbC1zZWNyZXQK
-#      token-validity-in-seconds: 86400
-
-  jpa:
-    database: mysql
-    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
-    generate-ddl: true
-    hibernate:
-     ddl-auto: create
-    show_sql: true
-    format_sql: true
-
-  swagger:
-    enabled: true # Swagger? ??????.
-
-  springfox:
-    documentation:
-
-  mvc:
-    pathmatch:
-      matching-strategy: ant_path_matcher
 
 
-swagger-ui:
-  enabled: true # Swagger UI? ??????.
-#    default_batch_fetch_size: 1000
 
 logging.level:
   org.hibernate.SQL: debug

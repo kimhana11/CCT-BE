@@ -1,27 +1,20 @@
 package com.example.priny.user.Service;
 
-import com.example.priny.user.Config.ErrorCode;
-import io.jsonwebtoken.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.RequiredArgsConstructor;
 
+import com.example.priny.user.Config.ErrorCode;
+import com.example.priny.user.domain.UserDetails;
+import io.jsonwebtoken.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Base64;
 import java.util.Date;
 import java.util.List;
-import org.springframework.beans.factory.annotation.Value;
 
 @Component
 public class TokenProvider {
@@ -44,7 +37,7 @@ public class TokenProvider {
  //   }
 
     //토큰 생성
-    public String createToken(String userId, String roles){
+    public String createToken(String userId, List<String> roles){
         Claims claims = Jwts.claims().setSubject(userId);
         claims.put("roles",roles); // 정보는 키. 벨류로 저장
         //Date now = new Date();
@@ -91,7 +84,7 @@ public class TokenProvider {
             return !claims.getBody().getExpiration().before(new Date());
 
         }catch (SecurityException | MalformedJwtException e) {
-            logger.info("{}",ErrorCode.WRONG_TYPE_TOKEN.getCode());
+            logger.info("{}", ErrorCode.WRONG_TYPE_TOKEN.getCode());
             return false;
         } catch (ExpiredJwtException e) {
             logger.info("{}",ErrorCode.EXPIRED_TOKEN.getCode());
@@ -112,6 +105,7 @@ public class TokenProvider {
 //            return false;
 //        }
     }
+
 
 }
 

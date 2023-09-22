@@ -1,5 +1,6 @@
 package com.example.priny.resume.Entity;
 
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 

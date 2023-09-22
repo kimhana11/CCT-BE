@@ -1,8 +1,6 @@
 package com.example.priny.resume.Controller;
 
-import com.example.priny.company.JobPosting;
-import com.example.priny.company.JobPostingDto;
-import com.example.priny.company.JobService;
+
 import com.example.priny.config.CommonResponse;
 import com.example.priny.resume.Entity.ResumeResponseDto;
 import com.example.priny.resume.Entity.ResumeSaveRequesDto;
@@ -10,13 +8,10 @@ import com.example.priny.resume.Entity.ResumeUpdateDto;
 import com.example.priny.resume.Service.ResumeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.*;
 
-import java.nio.charset.Charset;
 import java.util.List;
 
 @RestController
@@ -42,7 +37,7 @@ public class ResumeController {
 
     //이력서 저장
     @PostMapping("/resume")
-    public ResponseEntity<CommonResponse> saveResume(@RequestBody ResumeSaveRequesDto resumeSaveRequesDto){HttpHeaders headers = new HttpHeaders();
+    public ResponseEntity<CommonResponse> saveResume(@RequestBody ResumeSaveRequesDto resumeSaveRequesDto){
         resumeService.saveResume(resumeSaveRequesDto.getUserId(), resumeSaveRequesDto);
         return ResponseEntity.ok(new CommonResponse("SUCCESS",200));
     }

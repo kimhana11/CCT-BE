@@ -35,13 +35,13 @@ public class UserDto {
 
     private String brith;
 
-    private String roles;
+    private List<String> roles;
 
     //담당자명
     private String cname;
 
     @Builder
-    public UserDto(String userId, String name, String password, String phone, String brith, String email, String address, String roles, String cname) {
+    public UserDto(String userId, String name, String password, String phone, String brith, String email, String address, List<String> roles, String cname) {
         this.userId = userId;
         this.name = name;
         this.password = password;

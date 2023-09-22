@@ -1,7 +1,6 @@
 package com.example.priny.scout.Service;
 
-import com.example.priny.resume.Entity.ResumeResponseDto;
-import com.example.priny.resume.Entity.ResumeUpdateDto;
+
 import com.example.priny.scout.Entity.Scout;
 import com.example.priny.scout.Entity.ScoutResponseDto;
 import com.example.priny.scout.Entity.ScoutSaveRequestDto;

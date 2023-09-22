@@ -1,5 +1,6 @@
 package com.example.priny.user.Config;
 
+
 import lombok.Getter;
 
 @Getter

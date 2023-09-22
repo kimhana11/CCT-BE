@@ -1,7 +1,7 @@
 package com.example.priny.user.Service;
 
 
-import com.example.priny.user.Config.CommonResponse;
+import com.example.priny.config.CommonResponse;
 import com.example.priny.user.DTO.UserCheck;
 import com.example.priny.user.DTO.UserDto;
 import com.example.priny.user.DTO.UserSignInDto;
@@ -12,17 +12,14 @@ import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
-import com.example.priny.user.Config.PasswordEncoderConfig;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.List;
+import javax.transaction.Transactional;
 import java.util.Optional;
 
 @RequiredArgsConstructor
-@Transactional(readOnly = true)
+@Transactional
 @Service
 public class UserSignupServiceImpl implements UserSignupService {
 

@@ -1,9 +1,7 @@
 package com.example.priny.company;
 
-import org.springframework.stereotype.Service;
 
 import java.util.List;
-
 
 public interface JobService {
     //지원 저장
