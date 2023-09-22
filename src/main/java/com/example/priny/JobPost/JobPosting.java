@@ -1,4 +1,4 @@
-package com.example.priny.company;
+package com.example.priny.JobPost;
 
 import com.example.priny.user.domain.User;
 import com.fasterxml.jackson.annotation.JsonBackReference;

@@ -1,4 +1,4 @@
-package com.example.priny.company;
+package com.example.priny.JobPost;
 
 
 import com.example.priny.config.CommonResponse;

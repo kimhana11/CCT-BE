@@ -1,7 +1,7 @@
 package com.example.priny.user.domain;
 
 
-import com.example.priny.company.JobPosting;
+import com.example.priny.JobPost.JobPosting;
 import com.example.priny.resume.Entity.Resume;
 import com.example.priny.scout.Entity.Scout;
 import com.example.priny.user.DTO.UserDto;

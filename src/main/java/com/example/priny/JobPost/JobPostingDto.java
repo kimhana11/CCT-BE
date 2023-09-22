@@ -1,6 +1,7 @@
-package com.example.priny.company;
+package com.example.priny.JobPost;
 
 
+import com.example.priny.JobPost.JobPosting;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
