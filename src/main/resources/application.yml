@@ -1,0 +1,41 @@
+#spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
+#spring.datasource.url=jdbc:mysql://localhost:3306/CCT?serverTimezone=UTC
+#spring.datasource.username=root
+#spring.datasource.password=db12
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/resume
+    username: root
+    password: db12
+
+  jpa:
+    database: mysql
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+    generate-ddl: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect
+        ddl-auto: create
+    show_sql: true
+    format_sql: true
+
+
+  mvc:
+    path match:
+      matching-strategy: ant_path_matcher
+
+security:
+  jwt:
+    header: Authorization
+    token:
+      secret-key: secretsecretsecretsecretsecret
+
+
+
+
+logging.level:
+  org.hibernate.SQL: debug
+  org.hibernate.type: trace
+  # parameter Binding
