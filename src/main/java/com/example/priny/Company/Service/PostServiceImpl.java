@@ -50,8 +50,20 @@ public class PostServiceImpl implements PostService{
     }
 
 
-//    @Override
-//    public void postedit()
+    @Override
+    public PostResponseDTO postEdit(Long id, PostUpdateDTO postUpdateDTO){
+        Post post = postRepository.findById(id).orElse(null);
+        Post updatePost = Post.builder()
+                .address(postUpdateDTO.getAddress())
+                .manager(postUpdateDTO.getManager())
+                .title(postUpdateDTO.getTitle())
+                .description(postUpdateDTO.getDescription())
+                .languageList(postUpdateDTO.getLanguageList())
+                .periodList(postUpdateDTO.getPeriodList())
+                .build();
+        postRepository.save(updatePost);
+        return  postToResponseDTO(post);
+    }
 
 
     @Override

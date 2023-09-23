@@ -44,12 +44,12 @@ public class PostController {
     }
 
 
-//    //공고 수정
-//    @PutMapping("/editPost/{id}")
-//    public ResponseEntity<PostResponseDTO> editJobPost(@PathVariable Long id, @RequestBody PostUpdateDTO editDTO) {
-//        PostResponseDTO editedJobPost = postService.postedit(id, editDTO);
-//        return ResponseEntity.ok(editedJobPost);
-//    }
+    //공고 수정
+    @PutMapping("/editPost/{id}")
+    public ResponseEntity<PostResponseDTO> editJobPost(@PathVariable Long id, @RequestBody PostUpdateDTO editDTO) {
+        PostResponseDTO editedJobPost = postService.postEdit(id, editDTO);
+        return ResponseEntity.ok(editedJobPost);
+    }
 
 
     //공고 삭제

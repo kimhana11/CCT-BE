@@ -11,7 +11,7 @@ import java.util.List;
 public interface PostService {
     PostResponseDTO findById(Long id);
     public List<PostResponseDTO> findAllJobPosting();
-//    PostResponseDTO postedit(Long id, PostUpdateDTO postUpdateDTO);
+    PostResponseDTO postEdit(Long id, PostUpdateDTO postUpdateDTO);
     public void deleteById(Long id);
     Long JobPostSave(String userId, PostSaveRequestDTO postSaveRequestDTO);
 
