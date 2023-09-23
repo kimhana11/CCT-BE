@@ -36,6 +36,9 @@ public class ResumeServiceImpl implements ResumeService {
             throw new IllegalArgumentException("사용자가 존재하지 않습니다. id=" + id);
         }
         User user = userRepository.findByUserId(id).get();
+        if (user.getResume().getTitle() != null) {
+            throw new IllegalArgumentException("이력서가 이미 존재합니다. id=" + id);
+        }
         Resume resume = resumeSaveRequesDto.toEntity();
         resume.setUser(user);
         resumeRepository.save(resume);
