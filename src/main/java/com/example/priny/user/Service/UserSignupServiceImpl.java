@@ -42,31 +42,34 @@ public class UserSignupServiceImpl implements UserSignupService {
 
     @Override
     public ResponseEntity<CommonResponse> idCheck(UserCheck userCheck) {
-        try {
-            Optional<User> checkUser = userRepository.findByUserId(userCheck.getUserCheck());
-        } catch (IllegalArgumentException il) {
+        Optional<User> checkUser = userRepository.findByUserId(userCheck.getUserCheck());
+        if (checkUser.isPresent()) {
             return ResponseEntity.ok(new CommonResponse("FAIL", 403));
-        }  return ResponseEntity.ok(new CommonResponse("SUCCESS",200));
+        } else {
+            return ResponseEntity.ok(new CommonResponse("SUCCESS", 200));
+        }
     }
+
 
     @Override
     public ResponseEntity<CommonResponse> emailCheck(UserCheck userCheck) {
-        try {
             Optional<User> checkUser = userRepository.findByEmail(userCheck.getUserCheck());
-        } catch (IllegalArgumentException il) {
-            return ResponseEntity.ok(new CommonResponse("FAIL", 403));
-        }return ResponseEntity.ok(new CommonResponse("SUCCESS",200));
-    }
+            if (checkUser.isPresent()) {
+                return ResponseEntity.ok(new CommonResponse("FAIL", 403));
+            } else {
+                return ResponseEntity.ok(new CommonResponse("SUCCESS", 200));
+            }
+        }
 
     @Override
     public ResponseEntity<CommonResponse> phoneCheck(UserCheck userCheck) {
-        try {
             Optional<User> checkUser = userRepository.findByPhone(userCheck.getUserCheck());
-        } catch (IllegalArgumentException il) {
-            return ResponseEntity.ok(new CommonResponse("FAIL", 403));
-        }return ResponseEntity.ok(new CommonResponse("SUCCESS",200));
-    }
-
+            if (checkUser.isPresent()) {
+                return ResponseEntity.ok(new CommonResponse("FAIL", 403));
+            } else {
+                return ResponseEntity.ok(new CommonResponse("SUCCESS", 200));
+            }
+        }
 
 
     @Override
