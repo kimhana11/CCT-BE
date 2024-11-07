@@ -18,12 +18,13 @@ public class ResumeUpdateDto {
     private List<String> stackList;
     private List<String> periodList;
 
-    public void update(Resume resume) {
-            resume.setTitle(this.title);
-            resume.setProjectList(this.projectList);
-            resume.setDetail(this.detail);
-            resume.setStackList(this.stackList);
-            resume.setPeriodList(this.periodList);
+    public Resume update() {
+        return Resume.builder().title(this.title)
+                .projectList(this.projectList)
+                .detail(this.detail)
+                .stackList(this.stackList)
+                .periodList(this.periodList)
+                .build();
         }
 
     @Builder
