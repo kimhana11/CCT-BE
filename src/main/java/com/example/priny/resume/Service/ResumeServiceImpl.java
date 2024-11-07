@@ -74,7 +74,7 @@ public class ResumeServiceImpl implements ResumeService {
         if(resume == null){
             throw new IllegalArgumentException("이력서가 존재하지 않습니다.");
         }
-        resumeUpdateDto.update(resume);
+        resume = resumeUpdateDto.update();
         resumeRepository.save(resume);
     }
 
